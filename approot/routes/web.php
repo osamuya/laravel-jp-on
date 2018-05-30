@@ -11,6 +11,7 @@
 |
 */
 
+/* Laravel Default */
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,3 +19,8 @@ Route::get('/', function () {
 
 /* laravel-jp-on */
 Route::get('/laravel-jp-on/index', 'LaravelJpOnController@index');
+
+/* Laravel Auth Default */
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
