@@ -1,0 +1,54 @@
+# Linux
+.Xauthority
+.bash_logout
+.bash_profile
+.bash_history
+.bashrc
+.mysql_history
+.cache/
+.config/
+.local/
+.ssh/
+.subversion
+.viminfo
+.htpasswd
+
+# our system
+logs/*
+tmp/*
+batch/*
+backup/*
+
+# paramert our document e.t.c
+.para/
+.doc/
+
+# Mac
+.DS_Store
+# Windows
+Thumbs.db
+
+# Laravel
+approot/node_modules
+approot/public/storage
+approot/public/hot
+approot/public/.htaccess
+approot/storage/*.key
+approot/vendor
+approot/.idea
+approot/Homestead.json
+approot/Homestead.yaml
+approot/.env
+approot/storage/framework/views/*
+approot/storage/debugbar/*
+
+
+# phpmyadmin
+approot/public/pma/
+# node module
+approot/public/node_modules
+# npm
+.npm
+
+
+
