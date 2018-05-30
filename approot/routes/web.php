@@ -16,9 +16,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 /* laravel-jp-on */
 Route::get('/laravel-jp-on/index', 'LaravelJpOnController@index');
+/* laravel-jp-on Auth */
+// Route::match(['get', 'head'],'/register', 'Auth\RegisterController@showRegistrationForm');
+Route::post('/register/confirm', 'Auth\SignupController@registerConfirm');
+Route::post('/register/store', 'Auth\SignupController@registerStore');
 
 /* Laravel Auth Default */
 Auth::routes();
