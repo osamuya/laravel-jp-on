@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/* laravel-jp-on */
+Route::get('/laravel-jp-on/index', 'LaravelJpOnController@index');

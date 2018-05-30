@@ -5,3 +5,8 @@ Laravelのある程度の日本語化とスタートアップ時のパッケー�
 
 - 会員登録機能（Auth)の日本語化とメール認証。
 - Debugbarの付属
+- bashのオプティマイザー
+
+# チュートリアル
+
+LaravelJpOnController.php
