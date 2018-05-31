@@ -18,11 +18,28 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
+     * 追加の日本語関連カラムのfillを追加する
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+      'name',
+      // 'password',
+      'email',
+      'gender',
+      'birth_date',
+      'family_name',
+      'given_name',
+      'family_name_kana',
+      'given_name_kana',
+      'tel',
+      'uniqueid',
+      'uniquehash',
+      // 'remember_token',
+      'description',
+      'role',
+      'status',
+      'last_login',
     ];
 
     /**

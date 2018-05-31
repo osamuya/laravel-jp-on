@@ -11,6 +11,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 /* Hepler service provider */
 use Helper;
+/* Datetime package "Carbon" for laravel */
+use Carbon\Carbon;
+
 
 class SignupController extends Controller
 {
@@ -43,9 +46,9 @@ class SignupController extends Controller
     ];
 
     /* Session flash keep */
-    $request->session()->flash("name", $request->input('name'));
-    $request->session()->flash("email", $request->input('email'));
-    $request->session()->flash("password", $request->input('password'));
+    $request->session()->put("name", $request->input('name'));
+    $request->session()->put("email", $request->input('email'));
+    $request->session()->put("password", $request->input('password'));
 
     /* Reload prevention request and session */
     $request->session()->flash('new_regist_store_flag',true);
@@ -72,13 +75,66 @@ class SignupController extends Controller
     $request->session()->get("email");
     $request->session()->get("password");
 
+    /* make unique id (like SMG-5b0f7937e71de) */
+    $uniqueid = Helper::makeUniqueId("SMG");
+
+    /* hash for Email auth (HMAC) */
+    $uniqehash = Helper::makeUniqueHash();
+
+
+    /* Debuger */
     \Debugbar::info($request->session()->get("name"));
     \Debugbar::info($request->session()->get("email"));
     \Debugbar::info($request->session()->get("password"));
+    \Debugbar::info($uniqueid);
 
-
+    /* save data */
+    $regist_data = [
+      'name' => $request->session()->get("name"),
+      'password' => $request->session()->get("password"),
+      'email' => $request->session()->get("email"),
+      'uniqueid' => $uniqueid,
+      'uniquehash' => $uniqehash,
+      'role' => 1,
+      'status' => 1,
+      'deleted_at' => NULL,
+    ];
+    $this->create($regist_data);
 
     return view("auth.store");
   }
+
+
+  protected function create(array $regist_data)
+  {
+    var_dump($regist_data);
+      return User::create([
+        // 'id' => $regist_data['id'],
+        'name' => $regist_data['name'],
+        'password' => $regist_data['password'],
+        'email' => $regist_data['email'],
+        // 'gender' => $regist_data['gender'],
+        // 'birth_date' => $regist_data['birth_date'],
+        // 'family_name' => $regist_data['family_name'],
+        // 'given_name' => $regist_data['given_name'],
+        // 'family_name_kana' => $regist_data['family_name_kana'],
+        // 'given_name_kana' => $regist_data['given_name_kana'],
+        // 'tel' => $regist_data['tel'],
+        'uniqueid' => $regist_data['uniqueid'],
+        'uniquehash' => $regist_data['uniquehash'],
+        // 'remember_token' => $regist_data['remember_token'],
+        // 'description' => $regist_data['description'],
+        'role' => 1,
+        'status' => 1,
+        // 'last_login' => $regist_data['last_login'],
+        'deleted_at' => $regist_data['deleted_at'],
+        // 'created_at' => $regist_data['created_at'],
+        // 'updated_at' => $regist_data['updated_at'],
+      ]);
+  }
+
+
+
+
 
 }
