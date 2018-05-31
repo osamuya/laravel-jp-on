@@ -162,6 +162,8 @@ return [
 
         /* laravel-debugbar (laravel-jp-on) */
         Barryvdh\Debugbar\ServiceProvider::class,
+        /* Helper class (laravel-jp-on) */
+        App\Providers\HelperServiceProvider::class,
 
     ],
 
@@ -214,6 +216,8 @@ return [
 
         /* laravel-debugbar (laravel-jp-on) */
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        /* laravel Helper (laravel-jp-on) */
+        'Helper' => App\Helpers\Helper::class,
     ],
 
 ];
