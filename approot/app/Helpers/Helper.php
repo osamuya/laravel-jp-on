@@ -2,6 +2,9 @@
 
 namespace App\Helpers;
 
+/* Datetime package "Carbon" for laravel */
+use Carbon\Carbon;
+
 class Helper
 {
     /**
@@ -36,7 +39,8 @@ class Helper
      */
      public static function makeUniqueHash()
      {
-       $add_string = mt_rand(1111,9999);
+       $dt = Carbon::now();
+       $add_string = mt_rand(1111,9999).$dt->format('Ymdhis').$dt->micro;;
        $uniqehash = hash_hmac(
          'ripemd256',
          env("APP_KEY"),

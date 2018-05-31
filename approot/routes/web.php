@@ -22,6 +22,7 @@ Route::get('/laravel-jp-on/index', 'LaravelJpOnController@index');
 // Route::match(['get', 'head'],'/register', 'Auth\RegisterController@showRegistrationForm');
 Route::post('/register/confirm', 'Auth\SignupController@registerConfirm');
 Route::post('/register/store', 'Auth\SignupController@registerStore');
+Route::get('/mail_authenticate_user/{accesshash}', 'Auth\SignupController@mailAuthenticate');
 
 /* Laravel Auth Default */
 Auth::routes();

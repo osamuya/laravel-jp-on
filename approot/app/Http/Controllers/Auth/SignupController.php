@@ -88,14 +88,18 @@ class SignupController extends Controller
     /* crypt password */
     $passwordhash = bcrypt($request->session()->get("password"));
 
-    /* Debuger */
+    /*------------------------------------------------
+     * Debuger
+     */
     \Debugbar::info($request->session()->get("name"));
     \Debugbar::info($request->session()->get("email"));
     \Debugbar::info($request->session()->get("password"));
     \Debugbar::info($passwordhash);
     \Debugbar::info($uniqueid);
 
-    /* save data */
+    /*------------------------------------------------
+     * save data
+     */
     $regist_data = [
       'name' => $request->session()->get("name"),
       'password' => $passwordhash,
@@ -109,17 +113,11 @@ class SignupController extends Controller
     $this->create($regist_data);
 
     /* access uri */
-    $access_uri = "";
+    $access_uri = env("APP_URL")."/mail_authenticate_user/".$uniqehash;
 
     /*------------------------------------------
      * Sendmail Section
-     *
-     *
-     *
-     *
-     *
      */
-
      /* parameter */
     $mail_to = $request->session()->get("email");
     $options = [
@@ -177,6 +175,19 @@ class SignupController extends Controller
   }
 
 
+  /**=============================================
+   * メール認証
+   *
+   * accesshash
+   * date
+   * status
+   */
+  protected function mailAuthenticate($accesshash) {
+
+
+
+    return $accesshash;
+  }
 
 
 
