@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+/* add */
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -35,5 +39,18 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /* ログイン条件の変更 */
+    public function credentials(Request $request)
+    {
+        /* 通常のメンバーログインはrole + status + delflag */
+        $authConditionsOrigin = $request->only($this->username(), 'password');
+        $authConditionsCustom = array_merge(
+            $authConditionsOrigin,
+            ['status' => 2],
+            ['deleted_at' => NULL]
+        );
+        return $authConditionsCustom;
     }
 }

@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-
 /* Hepler service provider */
 use Helper;
 /* Datetime package "Carbon" for laravel */
 use Carbon\Carbon;
-
+/* Mail */
+use Mail;
+use App\Mail\BaseMail;
 
 class SignupController extends Controller
 {
@@ -53,9 +54,6 @@ class SignupController extends Controller
     /* Reload prevention request and session */
     $request->session()->flash('new_regist_store_flag',true);
 
-    // $value = Helper::xxx('Hello world!!');
-    // var_dump($value);
-
     return view("auth.confirm")->with("regist_data", $regist_data);
   }
 
@@ -68,8 +66,14 @@ class SignupController extends Controller
   public function registerStore(Request $request)
   {
 
-    // $re = RegisterHelper::xxx('Hello world!!');
-    // var_dump($re);
+    /*---------------------------------------
+     * Save parameter
+     *
+     * - name
+     * - email
+     * - password
+     */
+
     /* Session flash keep */
     $request->session()->get("name");
     $request->session()->get("email");
@@ -81,17 +85,20 @@ class SignupController extends Controller
     /* hash for Email auth (HMAC) */
     $uniqehash = Helper::makeUniqueHash();
 
+    /* crypt password */
+    $passwordhash = bcrypt($request->session()->get("password"));
 
     /* Debuger */
     \Debugbar::info($request->session()->get("name"));
     \Debugbar::info($request->session()->get("email"));
     \Debugbar::info($request->session()->get("password"));
+    \Debugbar::info($passwordhash);
     \Debugbar::info($uniqueid);
 
     /* save data */
     $regist_data = [
       'name' => $request->session()->get("name"),
-      'password' => $request->session()->get("password"),
+      'password' => $passwordhash,
       'email' => $request->session()->get("email"),
       'uniqueid' => $uniqueid,
       'uniquehash' => $uniqehash,
@@ -101,13 +108,49 @@ class SignupController extends Controller
     ];
     $this->create($regist_data);
 
+    /* access uri */
+    $access_uri = "";
+
+    /*------------------------------------------
+     * Sendmail Section
+     *
+     *
+     *
+     *
+     *
+     */
+
+     /* parameter */
+    $mail_to = $request->session()->get("email");
+    $options = [
+        'from' => env("MAIL_FROM_ADDRESS"),
+        'from_jp' => '仮登録完了のお知らせです',
+        'to' => $mail_to,
+        'subject' => '仮登録完了のお知らせ',
+        'template' => 'mails.regist',
+        "bcc" => env("ADMIN_MAILADDRESS"),
+    ];
+    $dt = Carbon::now();
+    $registed_date = $dt->format('Y年m月d日 h:i:s');
+
+    /* mail template value */
+    $sndData = [
+        "name" => $request->session()->get("name"),
+        "email" => $request->session()->get("email"),
+        "password" => "",
+        "datetime" => $registed_date,
+        "accessURL" => $access_uri,
+    ];
+
+    /* sendmail */
+    Mail::to($mail_to)->send(new BaseMail($options, $sndData));
+
     return view("auth.store");
   }
 
 
   protected function create(array $regist_data)
   {
-    var_dump($regist_data);
       return User::create([
         // 'id' => $regist_data['id'],
         'name' => $regist_data['name'],
