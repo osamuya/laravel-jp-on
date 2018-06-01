@@ -53,4 +53,27 @@ class LoginController extends Controller
         );
         return $authConditionsCustom;
     }
+
+    /**
+     * 認証失敗時の日本語化
+     */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+      /* Login */
+      throw ValidationException::withMessages([
+        $this->username() => [trans('認証に失敗しました。')],
+      ]);
+      /* auth.throttle */
+
+    }
+
+
+
+
+
+
+
+
+
+    
 }
