@@ -28,3 +28,6 @@ Route::get('/mail_authenticate_user/{accesshash}', 'Auth\SignupController@mailAu
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/user', 'HomeController@user');
+Route::get('/home/user_update', 'HomeController@user_update');
+Route::post('user_update_confirm', 'HomeController@user_update');

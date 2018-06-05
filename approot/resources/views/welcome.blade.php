@@ -48,7 +48,9 @@
             .title {
                 font-size: 84px;
             }
-
+            .links {
+              margin-bottom: 50px;
+            }
             .links > a {
                 color: #636b6f;
                 padding: 0 25px;
@@ -69,10 +71,10 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">ホーム</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('login') }}">ログイン</a>
+                        <a href="{{ route('register') }}">ユーザー登録</a>
                     @endauth
                 </div>
             @endif
@@ -91,7 +93,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="/laravel-jp-on/index">laravel-jp-o index</a>
+                    <a href="/laravel-jp-on/index">laravel-jp-o インデックス</a>
                 </div>
             </div>
         </div>
