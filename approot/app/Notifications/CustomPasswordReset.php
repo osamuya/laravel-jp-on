@@ -50,7 +50,7 @@ class CustomPasswordReset extends Notification
                     // ->line('The introduction to the notification.')
                     // ->action('Notification Action', url('/'))
                     // ->line('Thank you for using our application!');
-                    ->subject(__('Reset Password'))
+                    ->subject(__('パスワードリセットの案内'))
                     ->view('mails.reset')
                     ->action(__('Reset Password'), url('password/reset', $this->token));
     }

@@ -1,10 +1,11 @@
-<h3>
-    <a href="{{ config('app.url') }}">{{ config('app.name') }}</a>
-</h3>
-<p>
-    {{ __('Click link below and reset password.') }}<br>
-    {{ __('If you did not request a password reset, no further action is required.') }}
-</p>
-<p>
-    {{ $actionText }}: <a href="{{ $actionUrl }}">{{ $actionUrl }}</a>
-</p>
+************************************************<br>
+{{env("APP_NAME")}} パスワードリセットの案内<br>
+************************************************<br>
+<br>
+下のリンクをクリックし、パスワードをリセットしてください。<br>
+パスワードリセットを要求していない場合は、操作の必要はありません。<br>
+<br>
+リセットパスワード: <a href="{{ $actionUrl }}">{{ $actionUrl }}</a><br>
+<br>
+<br>
+@include('mails.mailfooter')
