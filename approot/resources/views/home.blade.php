@@ -23,7 +23,7 @@
           <div class="card">
             <div class="card-header">メニュー</div>
             <ul　class="mt30">
-              <li><a href="/home/user">ユーザー情報</a></li>
+              <li><a href="#">dummy</a></li>
             </ul>
           </div>
         </div>
