@@ -5,12 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">ダッシュボード（ユーザーページ）</div>
+                <div class="card-header">
+                  ダッシュボード（ユーザーページ）
+                </div>
 
                 <div class="card-body">
                   <div class="alert alert-success" role="alert">
-                    ログインしました。
-                    日付: {{ date('Y年m月d日　H時i分s秒', time()) }}
+                    <div>ようこそ! {{$name}}</div>
+                    <div>日付: {{ date('Y年m月d日　H時i分s秒', time()) }}</div>
                   </div>
 
                 </div>

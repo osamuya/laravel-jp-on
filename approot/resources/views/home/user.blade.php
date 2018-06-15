@@ -51,7 +51,10 @@
                     </tbody>
                   </table>
 
-                  <a href="/home/user_update" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">ユーザー情報を更新する</a>
+                  <div class="col-md-6 offset-md-4 mt30 mb30">
+                    <a href="/home/user_update" class="btn btn-primary active" role="button" aria-pressed="true">ユーザー情報を更新する</a>
+                  </div>
+
                 </div>
             </div>
         </div>

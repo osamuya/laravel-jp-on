@@ -29,5 +29,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/user', 'HomeController@user');
-Route::get('/home/user_update', 'HomeController@user_update');
-Route::post('user_update_confirm', 'HomeController@user_update');
+Route::get('/home/user_update', 'HomeController@userUpdate');
+Route::match(['get', 'post'],'/home/user_update_confirm', 'HomeController@userUpdateConfirm');

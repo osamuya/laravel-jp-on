@@ -146,7 +146,14 @@ class SignupController extends Controller
     return view("auth.store");
   }
 
-
+  /**
+   * 登録情報の保存
+   * create()
+   * accesshash
+   * date
+   * status
+   * @return Objact
+   */
   protected function create(array $regist_data)
   {
       return User::create([
@@ -202,7 +209,6 @@ class SignupController extends Controller
     } else {
       abort(403);
     }
-
 
     return $user_id;
   }

@@ -58,4 +58,55 @@ class Helper
        return $uniqehash;
      }
 
+     /**
+      * Select(プルダウン)の西暦生成
+      * selectYears()
+      *
+      * @return array
+      */
+     public static function selectYears($start_year=NULL, $end_year=NULL, $term=100) {
+
+       if ($end_year == NULL) {
+          $end_year = Carbon::today()->format('Y');
+       }
+       if ($start_year == NULL) {
+          $start_year = Carbon::today()->subYear($term)->format('Y');
+       }
+
+        $years = [];
+        for ( $i = intval($start_year); $i < $start_year + $term; $i++) {
+          array_push($years,$i);
+        }
+        return $years;
+     }
+
+     /**
+      * Select(プルダウン)の月
+      * selectMonth()
+      *
+      * @return array
+      */
+     public static function selectMonth() {
+
+        $month = [];
+        for ( $i = 1; $i <= 12; $i++) {
+          array_push($month,$i);
+        }
+        return $month;
+     }
+
+     /**
+      * Select(プルダウン)の月
+      * selectMonth()
+      *
+      * @return array
+      */
+     public static function selectDay() {
+
+        $day = [];
+        for ( $i = 1; $i <= 31; $i++) {
+          array_push($day,$i);
+        }
+        return $day;
+     }
 }
