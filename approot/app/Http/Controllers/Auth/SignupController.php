@@ -192,7 +192,7 @@ class SignupController extends Controller
   protected function mailAuthenticate($accesshash) {
 
     $mail_auth_term = config('app.mail_auth_term');
-    var_dump($mail_auth_term);
+    // var_dump($mail_auth_term);
     $dt = Carbon::now();
     $expirationTime = $dt->subHour(intval($mail_auth_term));
     $user_id = User::where('deleted_at', NULL)
@@ -210,7 +210,7 @@ class SignupController extends Controller
       abort(403);
     }
 
-    return $user_id;
+    return view("auth.mail_authenticate")->with("id",$user_id);
   }
 
 
