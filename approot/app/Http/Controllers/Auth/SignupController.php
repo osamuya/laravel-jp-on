@@ -206,8 +206,10 @@ class SignupController extends Controller
         ->update([
             'status' => 2,
         ]);
-    } else {
+    } else if ($user_id == NULL) {
       abort(403);
+    } else {
+      abort(404);
     }
 
     return view("auth.mail_authenticate")->with("id",$user_id);
