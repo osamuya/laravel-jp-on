@@ -51,6 +51,7 @@ class LoginController extends Controller
             ['status' => 2],
             ['deleted_at' => NULL]
         );
+        \Debugbar::info($authConditionsCustom);
         return $authConditionsCustom;
     }
 
